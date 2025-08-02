@@ -1,4 +1,4 @@
-ocal export = {}
+local export = {}
 
 function export.captureFrameToPNG(filename, drawFunction, width, height)
     local canvas = love.graphics.newCanvas(width, height)
