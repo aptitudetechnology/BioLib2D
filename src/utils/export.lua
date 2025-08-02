@@ -7,8 +7,12 @@ function export.captureFrameToPNG(filename, drawFunction, width, height)
     drawFunction()
     love.graphics.setCanvas()
     local imageData = canvas:newImageData()
+    
+    -- Use LÖVE's save directory
+    local saveDir = love.filesystem.getSaveDirectory()
+    local filename = "diagram_output.png"
     imageData:encode("png", filename)
-    print("Exported diagram to " .. filename)
+    print("Saved to: " .. saveDir .. "/" .. filename)
 end
 
 return export
