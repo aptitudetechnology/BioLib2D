@@ -1,0 +1,19 @@
+{
+  "system": {
+    "vms": {
+      "VM001": {
+        "atp": 5,
+        "genes": [
+          { "id": "geneA", "active": true },
+          { "id": "geneB", "active": false }
+        ]
+      },
+      "VM002": {
+        "atp": 8,
+        "genes": [
+          { "id": "geneC", "active": true }
+        ]
+      }
+    }
+  }
+}

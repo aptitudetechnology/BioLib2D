@@ -1,0 +1,51 @@
+{
+  "system": {
+    "vms": {
+      "VM001": {
+        "atp": 25,
+        "genes": [
+          { "id": "geneA", "active": true },
+          { "id": "geneB", "active": true },
+          { "id": "geneC", "active": true },
+          { "id": "geneD", "active": false }
+        ],
+        "ribosomes": 8,
+        "mrna": [
+          { "gene": "geneA", "status": "translating" },
+          { "gene": "geneB", "status": "translating" },
+          { "gene": "geneC", "status": "waiting" }
+        ],
+        "proteins": [
+          { "name": "EnzymeA", "complete": true, "used_in": "reaction1" },
+          { "name": "TransporterB", "complete": true, "used_in": "membrane" }
+        ],
+        "reactions": [
+          { "id": "reaction1", "substrates": ["X"], "products": ["Y"], "rate": 0.8 }
+        ],
+        "metabolism": {
+          "glucose": 18,
+          "oxygen": 24,
+          "co2": 10
+        }
+      },
+      "VM002": {
+        "atp": 4,
+        "genes": [
+          { "id": "geneE", "active": true }
+        ],
+        "ribosomes": 1,
+        "mrna": [
+          { "gene": "geneE", "status": "translating" }
+        ],
+        "proteins": [
+          { "name": "SensorF", "complete": true }
+        ],
+        "metabolism": {
+          "glucose": 5,
+          "oxygen": 6,
+          "co2": 3
+        }
+      }
+    }
+  }
+}

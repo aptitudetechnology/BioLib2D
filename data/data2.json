@@ -1,0 +1,33 @@
+{
+  "system": {
+    "vms": {
+      "VM001": {
+        "atp": 12,
+        "genes": [
+          { "id": "geneA", "active": true },
+          { "id": "geneB", "active": true },
+          { "id": "geneC", "active": false }
+        ],
+        "ribosomes": 4,
+        "mrna": [
+          { "gene": "geneA", "status": "translating" },
+          { "gene": "geneB", "status": "waiting" }
+        ],
+        "proteins": [
+          { "name": "ProteinX", "complete": true },
+          { "name": "ProteinY", "complete": false }
+        ]
+      },
+      "VM002": {
+        "atp": 7,
+        "genes": [
+          { "id": "geneD", "active": true },
+          { "id": "geneE", "active": false }
+        ],
+        "ribosomes": 2,
+        "mrna": [],
+        "proteins": []
+      }
+    }
+  }
+}
