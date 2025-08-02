@@ -31,7 +31,7 @@ function love.keypressed(key)
         biovis.show_genetic_circuits = not biovis.show_genetic_circuits
     elseif key == "e" then
         local export = require("src.utils.export")
-        export.captureFrameToPNG("exports/diagram_output.png", biovis.draw, 800, 600)
+        export.captureFrameToPNG("exports/diagram_output.png", function() biovis:draw() end, 800, 600)
     end
 end
 
