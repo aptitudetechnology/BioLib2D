@@ -1,5 +1,5 @@
-run = "love BioLib2D/"
-modules = ["lua-5.2", "bash"]
+run = "XDG_RUNTIME_DIR=/tmp love ."
+modules = ["nix"]
 
 [nix]
-channel = "stable-25_05"
+channel = "stable-24_05"
