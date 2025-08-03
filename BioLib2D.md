@@ -583,6 +583,147 @@ end
 return BioLib2D
 ```
 
+## API Reference
+
+### BioLib2D:new(config)
+
+Creates a new BioLib2D instance with the specified configuration.
+
+**Parameters:**
+- `config` (table): Configuration options
+  - `data_source` (string): Path to BioXen data file (default: "bioxen_data.json")
+  - `grid_cols` (number): Number of columns in VM grid layout (default: 2)
+  - `grid_rows` (number): Number of rows in VM grid layout (default: 2)
+  - `cell_width` (number): Width of each VM cell visualization (default: 200)
+  - `cell_height` (number): Height of each VM cell visualization (default: 150)
+  - `show_atp_flow` (boolean): Enable ATP particle system (default: true)
+  - `show_genetic_circuits` (boolean): Show genetic circuit visualization (default: true)
+  - `animation_speed` (number): Animation speed multiplier (default: 1.0)
+
+**Returns:** BioLib2D instance
+
+**Example:**
+```lua
+local biovis = BioLib2D:new({
+    data_source = "my_bioxen_data.json",
+    grid_cols = 3,
+    grid_rows = 2,
+    cell_width = 250,
+    cell_height = 180,
+    animation_speed = 1.5
+})
+```
+
+### BioLib2D:update(dt)
+
+Updates the visualization state based on current BioXen data.
+
+**Parameters:**
+- `dt` (number): Delta time since last update
+
+**Example:**
+```lua
+function love.update(dt)
+    biovis:update(dt)
+end
+```
+
+### BioLib2D:draw()
+
+Renders the complete biological visualization.
+
+**Example:**
+```lua
+function love.draw()
+    biovis:draw()
+end
+```
+
+## Data Format
+
+BioLib2D expects JSON data in the following format:
+
+```json
+{
+    "system": {
+        "chassis_type": "E_coli_MG1655",
+        "total_ribosomes": 80,
+        "available_ribosomes": 45,
+        "timestamp": "2025-08-03T18:30:00Z"
+    },
+    "vms": {
+        "vm_1": {
+            "vm_id": "vm_1",
+            "atp_percentage": 75,
+            "ribosomes": 20,
+            "active_genes": 12,
+            "protein_count": 45,
+            "mrna_count": 8
+        },
+        "vm_2": {
+            "vm_id": "vm_2", 
+            "atp_percentage": 60,
+            "ribosomes": 15,
+            "active_genes": 8,
+            "protein_count": 32,
+            "mrna_count": 5
+        }
+    }
+}
+```
+
+## Controls
+
+- **Space**: Toggle ATP flow visualization
+- **G**: Toggle genetic circuit display
+- **R**: Reset visualization
+- **+/-**: Adjust animation speed
+- **F**: Toggle fullscreen mode
+
+## Configuration Examples
+
+### Research Configuration
+```lua
+local config = {
+    data_source = "research_data.json",
+    grid_cols = 4,
+    grid_rows = 2,
+    cell_width = 300,
+    cell_height = 220,
+    show_atp_flow = true,
+    show_genetic_circuits = true,
+    animation_speed = 0.8  -- Slower for detailed observation
+}
+```
+
+### Educational Configuration  
+```lua
+local config = {
+    data_source = "educational_demo.json",
+    grid_cols = 2,
+    grid_rows = 1,
+    cell_width = 400,
+    cell_height = 300,
+    show_atp_flow = true,
+    show_genetic_circuits = true,
+    animation_speed = 1.2  -- Slightly faster for engagement
+}
+```
+
+### Presentation Configuration
+```lua
+local config = {
+    data_source = "demo_data.json",
+    grid_cols = 1,
+    grid_rows = 1,
+    cell_width = 600,
+    cell_height = 400,
+    show_atp_flow = true,
+    show_genetic_circuits = false,  -- Focus on cellular processes
+    animation_speed = 1.5
+}
+```
+
 ## Usage Example
 
 ```lua
@@ -621,93 +762,119 @@ function love.keypressed(key)
 end
 ```
 
-## Features Summary
+## Features
 
-### Real-time Biological Process Visualization
+### 🧬 Real-time Biological Process Visualization
 - **VM Cellular Compartments**: Individual cells showing ribosome allocation, gene expression, protein synthesis
-- **ATP Energy Flow**: Particle system showing energy distribution across VMs
+- **ATP Energy Flow**: Particle system showing energy distribution across VMs  
 - **Gene Expression**: DNA transcription visualization with active/inactive regions
 - **Protein Synthesis**: mRNA movement and ribosome interaction animation
+- **Resource Dynamics**: Visual representation of cellular resource allocation and consumption
 
-### Scientific Accuracy
+### 🔬 Scientific Accuracy
 - **Biologically Informed**: Uses real BioXen data (ribosome counts, ATP levels, active genes)
 - **Realistic Constraints**: Respects cellular resource limitations and biological timescales
 - **Educational Value**: Clear visual representation of molecular processes
+- **Data-Driven**: Real-time synchronization with BioXen hypervisor state
 
-### Performance Features
+### ⚡ Performance Features
 - **60 FPS Rendering**: Optimized Love2D graphics with efficient particle systems
 - **Real-time Updates**: Live data integration from BioXen hypervisor
 - **Scalable Layout**: Supports 2-8 VMs in configurable grid layout
 - **Interactive Controls**: Toggle different visualization layers
+- **Memory Efficient**: Optimized for continuous operation
 
-### Integration Capabilities
+### 🔧 Integration Capabilities
 - **JSON Data Pipeline**: Compatible with BioXen's existing data export
 - **Modular Design**: Easy to extend with new visualization components
 - **Cross-platform**: Works on Windows, macOS, Linux via Love2D
+- **Hot Reloading**: Supports live data updates without restart
+- **Configurable**: Extensive customization options for different use cases
+
+## Use Cases
+
+- **Research Visualization**: Monitor BioXen VM behavior in real-time
+- **Educational Tool**: Demonstrate cellular processes and resource management
+- **System Debugging**: Visual debugging of biological hypervisor operations
+- **Presentations**: Engaging demonstrations of computational biology concepts
+- **Development**: Integration into larger biological simulation frameworks
+
+## Requirements
+
+- **Love2D**: Version 11.0 or higher
+- **Lua**: Version 5.1 or higher
+- **Operating System**: Windows, macOS, or Linux
+- **Graphics**: OpenGL 2.1+ compatible graphics card
+- **Memory**: 512MB RAM minimum, 1GB recommended
+- **Storage**: 50MB free space
 
 This library transforms BioXen's computational biological hypervisor into an engaging, scientifically accurate real-time visualization platform suitable for education, research, and system monitoring.
 
 
-Ah, that makes perfect sense! You've fixed the BioLib2D library on GitHub, but LuaRocks is still serving the old version with the broken init.lua. This is a common issue with package managers - they don't automatically sync with repository updates.
+## Installation
 
-🔄 Current Situation:
-✅ GitHub Repository
-Status: Fixed with corrected init.lua
-Module structure: Now properly matches rockspec
-Ready for use: Yes, if installed from source
-✅ LuaRocks Package
-Status: **UPDATED** - Now serving fixed version (1.0-2)
-Module structure: Fixed init.lua that properly matches rockspec
-Available: Ready for installation via `luarocks install biolib2d`
-🛠️ ~~Solutions While Waiting for LuaRocks Update~~ UPDATE COMPLETE:
+### LuaRocks Installation (Recommended)
 
-### ✅ **RECOMMENDED: Install Latest Version from LuaRocks**
-
-The issue has been resolved! You can now install the fixed version directly:
+The BioLib2D library is available on LuaRocks for easy installation:
 
 ```bash
-# Remove old version if installed
-luarocks remove biolib2d
+# Install the latest version
+luarocks install biolib2d
 
-# Install the latest fixed version (1.0-2)
+# Or install locally
 luarocks install --local biolib2d
 ```
 
-### Alternative Options (if needed):
+**Current Version**: 1.0-3 (Latest)
+**Dependencies**: lua >= 5.1
+**Package Status**: Active and maintained
 
-Option 1: Install from GitHub Source (for development)
+### GitHub Source Installation
 
-# Remove old LuaRocks versionluarocks remove biolib2d# Install directly from GitHub (fixed version)luarocks install --local https://github.com/aptitudetechnology/BioLib2D/archive/main.zip# Or clone and install locallygit clone https://github.com/aptitudetechnology/BioLib2D.gitcd BioLib2Dluarocks make --local biolib2d-1.0-1.rockspec
-Option 2: Manual Fix of Current Installation
+For development or the latest features:
 
-# Navigate to installed locationcd ~/.luarocks/share/lua/5.1/biolib2d/# Backup old init.luacp init.lua init.lua.backup# Download fixed init.lua from your GitHubcurl -o init.lua https://raw.githubusercontent.com/aptitudetechnology/BioLib2D/main/init.lua
-Option 3: Use Your Standalone Demo
+```bash
+# Clone the repository
+git clone https://github.com/aptitudetechnology/BioLib2D.git
+cd BioLib2D
 
-# Your standalone demo works perfectly and doesn't depend on the librarycd /home/chris/BioXen-jcvilove libs/biolib2d/
-📦 ~~For LuaRocks Package Update~~ **COMPLETED ✅**:
+# Install from source
+luarocks make --local biolib2d-1.0-3.rockspec
+```
 
-**UPDATE**: The package has been successfully updated on LuaRocks!
+### Package Information
 
-- ✅ **Version incremented**: Changed to 1.0-2
-- ✅ **Rockspec updated**: Points to latest GitHub release (v1.0.2)  
-- ✅ **Published to LuaRocks**: New package version available
-- ✅ **Downloads starting**: Available via `luarocks install biolib2d`
+- **Repository**: https://github.com/aptitudetechnology/BioLib2D
+- **LuaRocks Page**: https://luarocks.org/modules/caston1981/biolib2d
+- **License**: MIT
+- **Maintainer**: caston1981
 
-**LuaRocks Package Stats**:
-- Version 1.0-2: Published and available
-- Version 1.0-1: Previous version (13 total downloads)
-- Dependencies: lua >= 5.1
-- Status: Active in root manifest
-🎯 **SUCCESS - Problem Resolved!**
+## Version History
 
-The BioLib2D library is now **fully functional**:
+- **1.0-3**: Current version with all fixes and optimizations
+- **1.0-2**: Fixed module loading and structure issues  
+- **1.0-1**: Initial release
 
-- ✅ **Module loading works** - No more "module not found" errors
-- ✅ **Available on LuaRocks** - Install with `luarocks install biolib2d`
-- ✅ **GitHub source updated** - Latest code with fixed init.lua
-- ✅ **Version 1.0-2 published** - Ready for production use
+## Quick Start
 
-**Next Steps**: 
-1. Install the updated version: `luarocks install --local biolib2d`
-2. Test the library: `local BioLib2D = require("biolib2d")`
-3. Develop your applications using the fixed library structure
+After installation, you can use the library in your Love2D projects:
+
+```lua
+local BioLib2D = require("biolib2d")
+
+function love.load()
+    biovis = BioLib2D:new({
+        data_source = "bioxen_data.json",
+        grid_cols = 2,
+        grid_rows = 2
+    })
+end
+
+function love.update(dt)
+    biovis:update(dt)
+end
+
+function love.draw()
+    biovis:draw()
+end
+```
